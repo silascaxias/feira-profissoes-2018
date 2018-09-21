@@ -5,3 +5,13 @@
 .dl-horizontal dt {
     white-space: normal;
 }
+
+.card {
+    border: 0;
+    box-shadow: 0 0 20px 3px rgba(0,0,0,.2);
+}
+
+.btn {
+    background-color: #568ef6;
+    color: white;
+}
