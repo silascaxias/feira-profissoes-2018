@@ -1,4 +1,6 @@
-﻿
+﻿@using FeiraProfissoes.Database
+
+@model List<Cliente>
 @{
     ViewBag.Title = "Clientes";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,11 +17,18 @@
                         <tr>
                             <th>Nome</th>
                             <th>Telefone</th>
-                            <th></th>
+                            <th>Endereço</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach(Cliente cliente in Model)
+                        {
+                            <tr>
+                                <td>@cliente.Nome</td>
+                                <td>@cliente.Telefone</td>
+                                <td>@cliente.Endereco</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
