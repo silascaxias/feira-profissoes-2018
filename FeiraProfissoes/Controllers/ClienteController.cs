@@ -16,5 +16,17 @@ namespace FeiraProfissoes.Controllers
             List<Cliente> clientes = entities.Cliente.ToList();
             return View(clientes);
         }
+
+        public ActionResult Novo(Cliente cliente)
+        {
+            if (Request.HttpMethod == "POST")
+            {
+                DatabaseEntities entities = new DatabaseEntities();
+                entities.Cliente.Add(cliente);
+                entities.SaveChanges();
+                return Redirect("/Cliente");
+            }
+            return View();
+        }
     }
 }
