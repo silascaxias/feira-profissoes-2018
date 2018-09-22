@@ -28,5 +28,20 @@ namespace FeiraProfissoes.Controllers
             }
             return View();
         }
+        public ActionResult Deletar(int Id = 0)
+        {
+            DatabaseEntities entities = new DatabaseEntities();
+            Cliente cliente = entities.Cliente.Find(Id);
+
+            if (cliente == null)
+            {
+                return HttpNotFound();        
+            }
+            entities.Cliente.Remove(cliente);
+            entities.SaveChanges();
+
+            return Redirect("/Cliente");
+        }
+          
     }
 }

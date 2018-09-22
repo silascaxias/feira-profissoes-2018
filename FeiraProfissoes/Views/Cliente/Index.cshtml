@@ -8,24 +8,32 @@
 <div class="row mt-3">
     <div class="col-12">
         <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8"><h4>Clientes</h4></div>
+                    <div class="col-md-4">
+                        <a href="/Cliente/Novo" class="btn btn-success float-right">Novo</a>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
-                <h3>Clientes</h3>
-                <a href="/Cliente/Novo" class="btn">Novo</a>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Nome</th>
                             <th>Telefone</th>
                             <th>Endereço</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(Cliente cliente in Model)
+                        @foreach (Cliente cliente in Model)
                         {
                             <tr>
                                 <td>@cliente.Nome</td>
                                 <td>@cliente.Telefone</td>
                                 <td>@cliente.Endereco</td>
+                                <td><a href="/Cliente/Deletar/@cliente.Id" class="btn btn-danger" onclick="return confirm('Confirma exclusão deste cliente?')">Excluir</a></td>
                             </tr>
                         }
                     </tbody>
