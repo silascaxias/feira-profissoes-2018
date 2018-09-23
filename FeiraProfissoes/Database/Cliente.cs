@@ -11,12 +11,21 @@ namespace FeiraProfissoes.Database
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Cliente
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage ="Aqui ninguém é anônimo, insira um nome!")]
+        [StringLength(20, MinimumLength = 4, ErrorMessage = "Campo Nome deve ter entra 4 e 20 caracteres!")]
         public string Nome { get; set; }
+
+        [Required(ErrorMessage = "Insira um telefone!")]
         public string Telefone { get; set; }
+
+        [Display(Name = "Endereço")]
+        [Required(ErrorMessage = "Insira um Endereço!")]
         public string Endereco { get; set; }
     }
 }

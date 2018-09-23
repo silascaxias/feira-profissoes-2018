@@ -20,11 +20,19 @@ namespace FeiraProfissoes.Controllers
         public ActionResult Novo(Cliente cliente)
         {
             if (Request.HttpMethod == "POST")
-            {
-                DatabaseEntities entities = new DatabaseEntities();
-                entities.Cliente.Add(cliente);
-                entities.SaveChanges();
-                return Redirect("/Cliente");
+            { 
+                if (ModelState.IsValid)
+                {
+                    DatabaseEntities entities = new DatabaseEntities();
+                    entities.Cliente.Add(cliente);
+                    entities.SaveChanges();
+                    return Redirect("/Cliente");
+                }
+                else
+                {
+                    return View(cliente);
+                }
+                
             }
             return View();
         }
@@ -34,19 +42,21 @@ namespace FeiraProfissoes.Controllers
             DatabaseEntities entities = new DatabaseEntities();
             Cliente cliente = entities.Cliente.Find(Id);
 
+            if(cliente == null)
+            {
+                return HttpNotFound();
+            }
             if (Request.HttpMethod == "POST")
             {
-                if (cliente == null)
+                if (ModelState.IsValid)
                 {
-                    return HttpNotFound();
+                    if (TryUpdateModel(cliente, "", new string[] { "Nome", "Telefone", "Endereco" }))
+                    {
+                        entities.SaveChanges();
+                        return Redirect("/Cliente");
+                    }
                 }
-
-                if(TryUpdateModel(cliente, "", new string[] {"Nome","Telefone","Endereco" }))
-                {
-                    entities.SaveChanges();
-                }  
-
-                return Redirect("/Cliente");
+                
             }
             return View(cliente);
         }
@@ -56,7 +66,7 @@ namespace FeiraProfissoes.Controllers
             DatabaseEntities entities = new DatabaseEntities();
             Cliente cliente = entities.Cliente.Find(Id);
 
-            if (cliente == null)
+            if (Id <= 0 || cliente == null)
             {
                 return HttpNotFound();        
             }
