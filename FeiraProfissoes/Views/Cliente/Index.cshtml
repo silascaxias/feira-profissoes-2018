@@ -23,7 +23,7 @@
                             <th>Nome</th>
                             <th>Telefone</th>
                             <th>Endereço</th>
-                            <th>Ações</th>
+                            <th><center>Ações</center></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +33,12 @@
                                 <td>@cliente.Nome</td>
                                 <td>@cliente.Telefone</td>
                                 <td>@cliente.Endereco</td>
-                                <td><a href="/Cliente/Deletar/@cliente.Id" class="btn btn-danger" onclick="return confirm('Confirma exclusão deste cliente?')">Excluir</a></td>
+                                <td>
+                                    <center>
+                                        <a href="/Cliente/Editar/@cliente.Id" class="btn btn-warning">Editar</a>
+                                        <a href="/Cliente/Deletar/@cliente.Id" class="btn btn-danger" onclick="return confirm('Confirma exclusão deste cliente?')">Excluir</a>
+                                    </center>
+                                </td>
                             </tr>
                         }
                     </tbody>
